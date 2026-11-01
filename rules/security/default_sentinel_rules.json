@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "rules_version": "2026.10.1",
+  "source": "SALEEM Sentinel Local Static Rulebase",
+  "rules": [
+    {
+      "id": "SENTINEL-EXT-001",
+      "title_en": "Deceptive Double Extension Executable",
+      "title_ar": "ملف تنفيذي بامتداد مزدوج مضلل",
+      "indicator_type": "DoubleExtension",
+      "weight": 45,
+      "confidence": "High",
+      "base_risk": "High",
+      "correlation_group": "NAMING_DECEPTION",
+      "description_en": "File uses a document/media extension followed by an executable extension (e.g., .pdf.exe, .jpg.scr).",
+      "description_ar": "يستخدم الملف امتداد مستند أو صورة متبوعاً بامتداد تنفيذي لإيهام المستخدم."
+    },
+    {
+      "id": "SENTINEL-MAGIC-002",
+      "title_en": "Executable PE Header Disguised as Non-Executable File",
+      "title_ar": "بنية ملف تنفيذي (PE) متخفية بامتداد غير تنفيذي",
+      "indicator_type": "MagicExtensionMismatch",
+      "weight": 55,
+      "confidence": "High",
+      "base_risk": "High",
+      "correlation_group": "FORMAT_MASQUERADE",
+      "description_en": "File starts with an MZ/PE executable header but has a non-executable extension (e.g., .txt, .png, .pdf).",
+      "description_ar": "يحتوي الملف على ترويسة تنفيذية MZ/PE رغم أن امتداده الظاهري يبدو كملف نصي أو صورة."
+    },
+    {
+      "id": "SENTINEL-SIG-003",
+      "title_en": "Invalid or Tampered Authenticode Digital Signature",
+      "title_ar": "توقيع رقمي (Authenticode) غير صالح أو تم التلاعب به",
+      "indicator_type": "InvalidAuthenticodeSignature",
+      "weight": 60,
+      "confidence": "High",
+      "base_risk": "High",
+      "correlation_group": "SIGNATURE_INTEGRITY",
+      "description_en": "File contains an embedded Authenticode signature that fails cryptographic hash or certificate validation.",
+      "description_ar": "يحتوي الملف على توقيع رقمي يفشل في التحقق التشفيري مما يشير لاحتمال تعديل الملف بعد توقيعه."
+    },
+    {
+      "id": "SENTINEL-ENTROPY-004",
+      "title_en": "High Section Entropy (Packed or Compressed Code Indicator)",
+      "title_ar": "عشوائية (Entropy) مرتفعة في أقسام الملف التنفيذي",
+      "indicator_type": "HighSectionEntropy",
+      "weight": 15,
+      "confidence": "Low",
+      "base_risk": "Low",
+      "correlation_group": "PACKING_HEURISTIC",
+      "description_en": "Executable contains sections with entropy > 7.2. Weak indicator alone; common in both compressed installers and packed binaries.",
+      "description_ar": "تحتوي أقسام الملف على عشوائية بيانات مرتفعة (> 7.2). مؤشر ضعيف بمفرده ويظهر أيضاً في برامج التثبيت المضغوطة."
+    }
+  ]
+}

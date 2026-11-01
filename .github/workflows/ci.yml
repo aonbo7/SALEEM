@@ -1,0 +1,45 @@
+name: SALEEM CI & Verification
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  verify-windows:
+    name: Build, Lint & Test (Windows x64)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Setup Rust Stable Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Install Frontend Dependencies
+        working-directory: apps/desktop
+        run: npm install
+
+      - name: Frontend TypeScript Check & Production Build
+        working-directory: apps/desktop
+        run: |
+          npm run typecheck
+          npm run build
+
+      - name: Check Rust Formatting
+        run: cargo fmt --all -- --check
+
+      - name: Run Rust Workspace Unit & Safety Tests
+        run: cargo test --workspace
+
+      - name: Build Release Binaries & Native Engine DLLs
+        shell: pwsh
+        run: ./scripts/build-release.ps1

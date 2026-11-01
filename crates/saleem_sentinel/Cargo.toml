@@ -1,0 +1,23 @@
+[package]
+name = "saleem_sentinel"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[lib]
+name = "saleem_sentinel"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+saleem_core = { path = "../saleem_core" }
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+hex.workspace = true
+goblin.workspace = true
+chrono.workspace = true
+windows-sys.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

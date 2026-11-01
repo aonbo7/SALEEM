@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "SALEEM",
+  "version": "0.5.0",
+  "identifier": "org.saleem.desktop",
+  "build": {
+    "beforeDevCommand": "npm.cmd run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm.cmd run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "SALEEM — Disk Intelligence & Security",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 1024,
+        "minHeight": 680,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self' tauri: http://tauri.localhost; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: asset: http://asset.localhost https://asset.localhost; font-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost https://ipc.localhost http://tauri.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "icon": [
+      "icons/icon.ico",
+      "icons/icon.png"
+    ],
+    "resources": {
+      "../../../target/release/saleem_disk_engine.dll": "Native/SALEEM.DiskEngine.dll",
+      "../../../target/release/saleem_cleanup_engine.dll": "Native/SALEEM.CleanupEngine.dll",
+      "../../../target/release/saleem_sentinel.dll": "Native/SALEEM.Sentinel.dll",
+      "../../../target/release/saleem_memory_engine.dll": "Native/SALEEM.MemoryEngine.dll",
+      "../../../rules/cleanup/default_cleanup_rules.json": "Resources/rules/cleanup/default_cleanup_rules.json",
+      "../../../rules/security/default_sentinel_rules.json": "Resources/rules/security/default_sentinel_rules.json",
+      "../../../LICENSE": "licenses/LICENSE-SALEEM.txt"
+    },
+    "windows": {
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      },
+      "nsis": {
+        "installMode": "currentUser",
+        "languages": ["English", "Arabic"],
+        "displayLanguageSelector": true
+      }
+    }
+  }
+}

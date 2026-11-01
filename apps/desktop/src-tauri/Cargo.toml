@@ -1,0 +1,47 @@
+[package]
+name = "saleem_desktop"
+version = "0.5.0"
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+default-run = "SALEEM"
+
+[lib]
+name = "saleem_desktop_lib"
+crate-type = ["rlib"]
+
+[[bin]]
+name = "SALEEM"
+path = "src/main.rs"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[build-dependencies]
+tauri-build = { version = "2.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.0", features = [] }
+serde.workspace = true
+serde_json.workspace = true
+rusqlite.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+libloading.workspace = true
+windows-sys.workspace = true
+sha2.workspace = true
+hex.workspace = true
+postgres = "0.19"
+native-tls = "0.2"
+postgres-native-tls = "0.5"
+saleem_core = { path = "../../../crates/saleem_core" }
+saleem_disk_engine = { path = "../../../crates/saleem_disk_engine" }
+saleem_cleanup_engine = { path = "../../../crates/saleem_cleanup_engine" }
+saleem_sentinel = { path = "../../../crates/saleem_sentinel" }
+saleem_quarantine = { path = "../../../crates/saleem_quarantine" }
+saleem_inventory = { path = "../../../crates/saleem_inventory" }
+saleem_memory_engine = { path = "../../../crates/saleem_memory_engine" }
+
+[dev-dependencies]
+tempfile.workspace = true

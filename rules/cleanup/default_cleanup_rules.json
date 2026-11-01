@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "rules_version": "2026.10.1",
+  "source": "SALEEM Official Cleanup Policy Repository",
+  "rules": [
+    {
+      "id": "CLEAN-TEMP-USER-001",
+      "name_en": "User Temporary Files (%LOCALAPPDATA%\\Temp)",
+      "name_ar": "الملفات المؤقتة للمستخدم (%LOCALAPPDATA%\\Temp)",
+      "category": "TemporaryFiles",
+      "risk_level": "Low",
+      "enabled_by_default": true,
+      "allowed_scopes": ["%LOCALAPPDATA%\\Temp"],
+      "min_age_hours": 24,
+      "exclude_locked_files": true,
+      "supports_quarantine_backup": true,
+      "reason_en": "Temporary files created by applications that are older than 24 hours and not locked.",
+      "reason_ar": "ملفات مؤقتة أنشأتها البرامج ومضى عليها أكثر من 24 ساعة وليست قيد الاستخدام."
+    },
+    {
+      "id": "CLEAN-CACHE-THUMB-002",
+      "name_en": "Windows Explorer Thumbnail Cache",
+      "name_ar": "ذاكرة المصغرات المؤقتة (Thumbnail Cache)",
+      "category": "ApplicationCache",
+      "risk_level": "Low",
+      "enabled_by_default": true,
+      "allowed_scopes": ["%LOCALAPPDATA%\\Microsoft\\Windows\\Explorer"],
+      "file_patterns": ["thumbcache_*.db"],
+      "min_age_hours": 0,
+      "exclude_locked_files": true,
+      "supports_quarantine_backup": false,
+      "reason_en": "Explorer thumbnail cache files that Windows automatically regenerates on demand.",
+      "reason_ar": "ملفات كاش الصور المصغرة التي يعيد نظام Windows إنشاءها تلقائياً عند الحاجة."
+    },
+    {
+      "id": "CLEAN-DUMPS-CRASH-003",
+      "name_en": "Application User-Mode Crash Dumps",
+      "name_ar": "ملفات تشخيص انهيار التطبيقات (Crash Dumps)",
+      "category": "CrashDumps",
+      "risk_level": "Medium",
+      "enabled_by_default": false,
+      "allowed_scopes": ["%LOCALAPPDATA%\\CrashDumps"],
+      "file_patterns": ["*.dmp"],
+      "min_age_hours": 48,
+      "exclude_locked_files": true,
+      "supports_quarantine_backup": true,
+      "reason_en": "Diagnostic memory dumps from past application crashes. Useful only if debugging recent crashes.",
+      "reason_ar": "ملفات تشخيص لأعطال سابقة في التطبيقات؛ قد تفيد المطورين فقط في حال تشخيص عطل حديث."
+    }
+  ]
+}
